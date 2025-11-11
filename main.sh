@@ -12,7 +12,8 @@ get_random_emoji() {
 }
 
 # 실행 경로 고정
-SCRIPT_DIR="$(pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "▶ 스크립트 디렉터리: $SCRIPT_DIR"
 LESSON_DIR="$SCRIPT_DIR/lessons"
 
 # 메뉴 목록

@@ -1,0 +1,5 @@
+Error: E100 at module A
+WARN: something odd
+INFO: start
+Error: E200 at module B
+INFO: done

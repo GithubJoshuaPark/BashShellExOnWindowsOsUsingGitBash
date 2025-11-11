@@ -172,3 +172,19 @@ bash-tutorial/
 ### main.sh 실행 화면 예시:
 
 ![menu.png](menu.png)
+
+---
+
+🧭 1️⃣ Git Bash의 /tmp 는 진짜 폴더가 아님
+
+Git Bash는 Windows 위에서 리눅스 스타일 경로를 흉내내는 가상 환경(MSYS2) 을 제공합니다.
+즉 /tmp 는 실제 디스크의 루트(C:\)에 있는 폴더가 아니라,
+Git Bash 내부의 임시 가상 파일시스템에 매핑되어 있어요.
+
+```bash
+| Bash 경로         | 실제 Windows 경로                                             |
+| ----------------- | ------------------------------------------------------------ |
+| `/c/Users/Joshua` | `C:\Users\Joshua`                                            |
+| `/tmp`            | `C:\Users\<계정>\AppData\Local\Temp` (또는 `C:\Windows\Temp`) |
+
+```

@@ -36,7 +36,7 @@ titles=(
     "($(get_random_emoji)) 정규표현식 집중 연습(1): 이메일/URL 패턴"
     "($(get_random_emoji)) 정규표현식 집중 연습(2): 한국 주민/전화/날짜 패턴"
     "($(get_random_emoji)) find & xargs & -exec"
-    "($(get_random_emoji)) 여기문서 & 템플릿 생성"
+    "($(get_random_emoji)) 여기문서(Heredoc) & 템플릿 생성"
     "($(get_random_emoji)) 파라미터 확장 고급"
     "($(get_random_emoji)) 에러처리 & 안전장치"
     "($(get_random_emoji)) 프로세스/잡/시그널"

@@ -84,6 +84,23 @@ pause
 echo "5) sed로 파일명 보기 좋게 변환"
 echo "모든 파일 목록에서 경로 제거:"
 find project -type f | sed -E 's#.*/#→ #'
+
+# find 입력 예시,sed 처리 (경로 부분 .*/을 → 로 치환),최종 출력
+# project/alpha/file1.txt,project/alpha/       → 로 치환됨,→ file1.txt
+# project/beta/file2.txt,project/beta/         → 로 치환됨,→ file2.txt
+# project/gamma/error_2025.log,project/gamma/  → 로 치환됨,→ error_2025.log
+
+# 💡 6️⃣ 왜 #을 썼나?
+# 보통 s/old/new/처럼 /을 구분자로 쓰지만,
+# 경로에는 /이 많이 들어가서 구분하기가 힘듭니다.
+# 그래서 / 대신 #를 쓰면 훨씬 가독성이 좋아집니다 👇
+
+# | 구문         | 설명                          |
+# | ------------ | ----------------------------- |
+# | `s/.*\//→ /` | 동작은 같지만 `/`가 너무 많음 |
+# | `s#.*/#→ #`  | 깔끔하게 표현 (추천 ✅)      |
+
+
 pause
 
 # ----------------------------------------------------

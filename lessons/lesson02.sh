@@ -11,7 +11,7 @@ pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; echo; }
 
 # ▣ [2] 스크립트 경로 및 tmp 폴더 설정
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TMP_DIR="$SCRIPT_DIR/tmp"
+TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 mkdir -p "$TMP_DIR"
 
 cat <<'B'
@@ -27,7 +27,7 @@ echo "- 글로빙(*, ?), grep/sed/awk, 정규표현식 간단 연습까지 해�
 echo
 
 # 🧭 실습용 작업 디렉터리 생성
-WORK_DIR="$TMP_DIR/lesson02_project"
+WORK_DIR="$TMP_DIR"
 rm -rf "$WORK_DIR"
 mkdir -p "$WORK_DIR"
 cd "$WORK_DIR"

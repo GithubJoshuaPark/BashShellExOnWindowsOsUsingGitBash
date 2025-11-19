@@ -15,7 +15,7 @@ echo
 pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TMP_DIR="$SCRIPT_DIR/tmp"
+TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 mkdir -p "$TMP_DIR"
 
 # ▣ [2] 헤더
@@ -34,7 +34,7 @@ echo
 # ------------------------------------------------------------
 echo "1️⃣  테스트용 설정파일 생성"
 
-CFG_FILE="$TMP_DIR/lesson12_sample.conf"
+CFG_FILE="$TMP_DIR/sample.conf"
 
 cat > "$CFG_FILE" <<'DATA'
 # Sample configuration file

@@ -5,14 +5,13 @@ echo "========================"
 echo "$(basename "$0") Start"
 echo "========================"
 
-#!/usr/bin/env bash
-set -euo pipefail
 pause() { read -rp "계속하려면 엔터를 누르세요..." _; echo; }
 
 # ▣ [2] 실행 중인 스크립트 경로 계산
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "▶ 스크립트 디렉터리: $SCRIPT_DIR"
-TMP_DIR="$SCRIPT_DIR/tmp"
+# tmp 디렉터리를 스크립트 이름 기반으로 생성
+TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 mkdir -p "$TMP_DIR"
 
 cat <<'B'
@@ -43,7 +42,7 @@ grep --help | head -n 5
 echo "(* man grep 은 인터랙티브 화면이라 생략)"
 pause
 
-TMP_FILE="$TMP_DIR/lesson01_tmp.txt"
+TMP_FILE="$TMP_DIR/tmp.txt"
 cat > "$TMP_FILE" <<'DATA'
 Error: E100 at module A
 WARN: something odd

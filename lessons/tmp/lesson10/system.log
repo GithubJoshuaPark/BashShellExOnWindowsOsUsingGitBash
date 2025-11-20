@@ -1,0 +1,9 @@
+INFO: Server started successfully.
+DEBUG: Initializing user-service...
+WARNING: Configuration value 'timeout' is deprecated.
+INFO: User 'userA' logged in.
+ERROR: Connection to database failed. Code: 503.
+DEBUG: User 'userB' session created.
+info: A minor issue occurred.
+ERROR: File not found at /var/log/data.log. Code: 404.
+INFO: Server is shutting down.

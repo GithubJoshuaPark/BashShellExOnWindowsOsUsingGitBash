@@ -2,12 +2,11 @@
 set -euo pipefail
 
 # ▣ [1] 공통 설정
-pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; echo; }
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
+source "$SCRIPT_DIR/utils.sh"
 
 echo "========================"
 echo "$(basename "$0") Start"
@@ -36,7 +35,7 @@ greet() {
 echo "함수 정의: greet() { ... }"
 echo "함수 호출: greet"
 greet # 함수 호출
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "2️⃣  인자(Argument) 전달"
@@ -57,7 +56,7 @@ print_args() {
 
 echo "함수 호출: print_args \"First Arg\" \"Second Arg\""
 print_args "First Arg" "Second Arg"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "3️⃣  반환 값 (종료 코드)"
@@ -92,7 +91,7 @@ echo "if문과 함께 사용:"
 if check_file_exists "$TMP_DIR/my_file.txt"; then
   echo "  -> 작업 성공!"
 fi
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "4️⃣  출력 값 (문자열 등)"
@@ -114,7 +113,7 @@ echo -e "line 1\nline 2\nline 3" > "$TMP_DIR/my_file.txt"
 echo "함수 호출: line_count=\$(get_line_count \"$TMP_DIR/my_file.txt\")"
 line_count=$(get_line_count "$TMP_DIR/my_file.txt")
 echo "  -> 라인 수: $line_count"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "5️⃣  스코프 (Scope): 전역 변수 vs 지역 변수"
@@ -143,7 +142,7 @@ echo
 echo "함수 안의 지역 변수에 접근 시도:"
 echo "  local_var: ${local_var:-'(접근 불가)'}"
 echo "💡 'local'을 사용해 의도치 않은 수정을 방지하는 것이 매우 중요합니다."
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "✅  레슨 08 완료!"

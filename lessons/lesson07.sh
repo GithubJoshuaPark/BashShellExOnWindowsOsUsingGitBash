@@ -2,12 +2,11 @@
 set -euo pipefail
 
 # ▣ [1] 공통 설정
-pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; echo; }
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
+source "$SCRIPT_DIR/utils.sh"
 
 echo
 echo "========================"
@@ -53,7 +52,7 @@ echo
 FRUITS+=("Mango")
 echo "원소 추가 후: FRUITS+=(\"Mango\")"
 echo "전체 원소: ${FRUITS[@]}"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "2️⃣  for 반복문"
@@ -63,20 +62,20 @@ echo "--- 기본 for문 ---"
 for fruit in "${FRUITS[@]}"; do
   echo "  I like $fruit"
 done
-pause
+f_pause
 
 echo "--- C 스타일 for문 ---"
 count=${#FRUITS[@]}
 for (( i=0; i < count; i++ )); do
   echo "  - Index $i: ${FRUITS[i]}"
 done
-pause
+f_pause
 
 echo "--- 시퀀스(범위) 사용 ---"
 for i in {1..5}; do
   echo "  Number: $i"
 done
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "3️⃣  while 반복문"
@@ -87,7 +86,7 @@ while [[ $counter -le 5 ]]; do
   echo "  while counter: $counter"
   ((counter++)) # 카운터 증가
 done
-pause
+f_pause
 
 echo "--- 파일을 한 줄씩 읽기 (매우 유용한 패턴) ---"
 # 테스트 파일 생성
@@ -99,7 +98,7 @@ echo "읽기 시작:"
 while read -r line; do
   echo "  Read line: '$line'"
 done < "$TMP_DIR/lines.txt"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "4️⃣  until 반복문"
@@ -110,7 +109,7 @@ until [[ $until_counter -gt 5 ]]; do
   echo "  until counter: $until_counter"
   ((until_counter++))
 done
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "5️⃣  반복문 제어 (break, continue)"
@@ -122,7 +121,7 @@ for i in {1..10}; do
   fi
   echo "  Number: $i"
 done
-pause
+f_pause
 
 echo "--- continue: 현재 반복을 건너뛰고 다음으로 진행 ---"
 for i in {1..5}; do
@@ -132,7 +131,7 @@ for i in {1..5}; do
   fi
   echo "  Number: $i"
 done
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "✅  레슨 07 완료!"

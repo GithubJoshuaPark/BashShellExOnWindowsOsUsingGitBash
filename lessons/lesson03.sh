@@ -7,6 +7,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 mkdir -p "$TMP_DIR"
 
+source "$SCRIPT_DIR/utils.sh"
+
 OUTPUT_FILE="$TMP_DIR/output.txt"
 ERROR_FILE="$TMP_DIR/errors.txt"
 ALL_OUTPUT_FILE="$TMP_DIR/all_output.txt"
@@ -29,6 +31,8 @@ echo "  1: 표준 출력 (stdout)"
 echo "  2: 표준 에러 (stderr)"
 echo
 
+f_pause
+
 # 1. 표준 출력 리다이렉션 (>)
 echo "1. 표준 출력 리다이렉션 (>) - 파일에 덮어쓰기"
 echo "   'echo \"Hello, World\" > $OUTPUT_FILE' 실행"
@@ -42,6 +46,8 @@ echo "   '$OUTPUT_FILE' 내용:"
 cat "$OUTPUT_FILE"
 echo "---------------------------------"
 
+f_pause
+
 # 2. 표준 출력 리다이렉션 (>>)
 echo "2. 표준 출력 리다이렉션 (>>) - 파일에 추가하기"
 echo "   'echo \"Appended Line\" >> $OUTPUT_FILE' 실행"
@@ -49,6 +55,8 @@ echo "Appended Line" >> "$OUTPUT_FILE"
 echo "   '$OUTPUT_FILE' 내용:"
 cat "$OUTPUT_FILE"
 echo "---------------------------------"
+
+f_pause
 
 # 3. 표준 에러 리다이렉션 (2>)
 echo "3. 표준 에러 리다이렉션 (2>)"
@@ -59,6 +67,8 @@ echo "   '$ERROR_FILE' 내용:"
 cat "$ERROR_FILE"
 echo "---------------------------------"
 
+f_pause
+
 # 4. 표준 출력과 표준 에러 모두 리다이렉션
 echo "4. 표준 출력과 에러 모두 리다이렉션"
 echo "   방법 1: '... > file 2>&1' (전통적 방식)"
@@ -68,12 +78,16 @@ echo "   '$ALL_OUTPUT_FILE' 내용:"
 cat "$ALL_OUTPUT_FILE"
 echo
 
+f_pause
+
 echo "   방법 2: '... &> file' (최신 Bash 방식)"
 echo "   'ls -l /non_existent_dir &> $ALL_OUTPUT_FILE' 실행 (덮어쓰기)"
 ls -l /non_existent_dir &> "$ALL_OUTPUT_FILE" || true
 echo "   '$ALL_OUTPUT_FILE' 내용:"
 cat "$ALL_OUTPUT_FILE"
 echo "---------------------------------"
+
+f_pause
 
 # 5. 표준 입력 리다이렉션 (<)
 echo "5. 표준 입력 리다이렉션 (<)"
@@ -82,6 +96,8 @@ echo -e "Line 1\nLine 2\nLine 3" > "$INPUT_FILE"
 echo "   'wc -l < $INPUT_FILE' 실행 (파일을 표준 입력으로)"
 wc -l < "$INPUT_FILE"
 echo "---------------------------------"
+
+f_pause
 
 # 6. 파이프라인 (|)
 echo "6. 파이프라인 (|) - 명령어 출력을 다른 명령어 입력으로"
@@ -93,6 +109,8 @@ echo "   'ls -1 $SCRIPT_DIR | sort -r | head -n 3' 실행"
 ls -1 "$SCRIPT_DIR" | sort -r | head -n 3
 echo "---------------------------------"
 
+f_pause
+
 # 7. tee 명령어
 echo "7. tee 명령어 - 화면과 파일 동시 출력"
 echo "   'echo \"Tee Test\" | tee $OUTPUT_FILE' 실행 (덮어쓰기)"
@@ -102,6 +120,8 @@ echo "   '$OUTPUT_FILE' 내용:"
 cat "$OUTPUT_FILE"
 echo
 
+f_pause
+
 echo "   'tee -a' 옵션으로 추가하기"
 echo "   'echo \"Tee Append Test\" | tee -a $OUTPUT_FILE' 실행"
 echo "Tee Append Test" | tee -a "$OUTPUT_FILE"
@@ -110,6 +130,7 @@ echo "   '$OUTPUT_FILE' 내용:"
 cat "$OUTPUT_FILE"
 echo "---------------------------------"
 
+f_pause
 
 echo
 echo "========================"

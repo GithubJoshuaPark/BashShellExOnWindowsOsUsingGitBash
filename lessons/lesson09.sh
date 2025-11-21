@@ -2,12 +2,11 @@
 set -euo pipefail
 
 # ▣ [1] 공통 설정
-pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; echo; }
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
+source "$SCRIPT_DIR/utils.sh"
 
 echo "========================"
 echo "$(basename "$0") Start"
@@ -41,7 +40,7 @@ touch "$TARGET_DIR/file with spaces.txt"
 
 echo "다음 파일들이 생성되었습니다:"
 ls -1 "$TARGET_DIR"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "2️⃣  Dry Run: 변경될 이름 미리보기"
@@ -65,7 +64,7 @@ find "$TARGET_DIR" -type f -name "*.txt" | while read -r file; do
   echo "  - [변경 후] $(basename "$new_name")"
   echo
 done
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "3️⃣  사용자 확인 및 실제 변경 실행"
@@ -88,7 +87,7 @@ find "$TARGET_DIR" -type f -name "*.txt" | while read -r file; do
   mv "$file" "$new_name"
   echo "  - 완료: $(basename "$new_name")"
 done
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "4️⃣  최종 결과 확인"
@@ -96,7 +95,7 @@ echo "작업 완료 후 디렉터리 상태:"
 ls -1 "$TARGET_DIR"
 echo
 echo "'.txt' 파일들의 이름이 성공적으로 변경되었습니다."
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "✅  레슨 09 완료!"

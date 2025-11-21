@@ -2,12 +2,12 @@
 set -euo pipefail
 
 # ▣ [1] 공통 설정
-pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; echo; }
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
+
+source "$SCRIPT_DIR/utils.sh"
 
 echo
 echo "========================"
@@ -39,7 +39,7 @@ echo "새로운 셸(자식 프로세스)에서 확인해보기:"
 echo "실행: bash -c 'echo \"Subshell sees: \$LOCAL_VAR\"'"
 bash -c 'echo "Subshell sees: $LOCAL_VAR"'
 echo "→ 자식 셸에서는 변수가 비어있습니다. 전달되지 않았기 때문입니다."
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "2️⃣  환경 변수와 'export'"
@@ -52,7 +52,7 @@ echo "새로운 셸(자식 프로세스)에서 다시 확인:"
 echo "실행: bash -c 'echo \"Subshell sees: \$EXPORTED_VAR\"'"
 bash -c 'echo "Subshell sees: $EXPORTED_VAR"'
 echo "→ export된 변수는 자식 셸에서도 접근 가능합니다."
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "3️⃣  주요 환경 변수들"
@@ -65,7 +65,7 @@ echo
 echo "'env'나 'printenv' 명령으로 모든 환경 변수를 볼 수 있습니다."
 echo "실행: env | grep SHELL"
 env | grep SHELL
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "4️⃣  일시적인 환경 변수 설정"
@@ -77,7 +77,7 @@ echo "명령 실행 후, 현재 셸에서 확인:"
 echo "실행: echo \"\$MY_TEMP_VAR\""
 echo "${MY_TEMP_VAR:-'(비어 있음)'}"
 echo "→ 현재 셸에는 해당 변수가 설정되지 않았습니다."
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "5️⃣  PATH 변수 다루기"
@@ -113,7 +113,7 @@ if command -v my_tool &> /dev/null; then
 else
     echo "-> 'my_tool'을 찾을 수 없습니다."
 fi
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "✅  레슨 05 완료!"

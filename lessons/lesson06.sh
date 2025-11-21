@@ -2,12 +2,12 @@
 set -euo pipefail
 
 # ▣ [1] 공통 설정
-pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; echo; }
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
+
+source "$SCRIPT_DIR/utils.sh"
 
 echo
 echo "========================"
@@ -46,7 +46,7 @@ echo "if true; then ... fi"
 if true; then
   echo "  -> 'true'는 성공(0)이므로 이 문장이 출력됩니다."
 fi
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "2️⃣  파일 테스트"
@@ -82,7 +82,7 @@ fi
 if [ ! -s "$TMP_DIR/empty.txt" ]; then
   echo "✅ [ ! -s \"$TMP_DIR/empty.txt\" ] : 파일이 비어있습니다. (!는 부정)"
 fi
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "3️⃣  문자열 테스트"
@@ -107,7 +107,7 @@ if [ -n "$VAR1" ]; then
   echo "✅ [ -n \"$VAR1\" ] : 문자열이 비어있지 않습니다."
 fi
 echo "💡 변수를 항상 큰따옴표로 감싸는 습관이 중요합니다!"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "4️⃣  정수 테스트"
@@ -132,7 +132,7 @@ if [ "$NUM2" -lt "$NUM1" ]; then
 fi
 # -ge: 크거나 같은가? (Greater or Equal)
 # -le: 작거나 같은가? (Less or Equal)
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "5️⃣  [ ] vs [[ ]]"
@@ -157,7 +157,7 @@ if [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "✅ [[ \"$VERSION\" =~ ... ]] : 버전 문자열 형식이 맞습니다. (정규표현식)"
 fi
 echo "💡 특별한 호환성이 필요한 경우가 아니면 [[ ]] 사용을 권장합니다."
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "✅  레슨 06 완료!"

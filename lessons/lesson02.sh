@@ -6,13 +6,11 @@ echo "$(basename "$0") Start"
 echo "========================"
 echo
 
-# ▣ [1] 기본 함수 정의
-pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; echo; }
-
-# ▣ [2] 스크립트 경로 및 tmp 폴더 설정
+# ▣ [1] 스크립트 경로 및 tmp 폴더 설정
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 mkdir -p "$TMP_DIR"
+source "$SCRIPT_DIR/utils.sh"
 
 cat <<'B'
 ========================================
@@ -33,7 +31,7 @@ mkdir -p "$WORK_DIR"
 cd "$WORK_DIR"
 echo "작업 디렉터리: $WORK_DIR"
 pwd
-pause
+f_pause
 
 # ----------------------------------------------------
 echo "1) 디렉터리 및 파일 생성"
@@ -45,7 +43,7 @@ touch project/gamma/error_2025.log
 
 echo "생성된 파일:"
 find project -type f | sort
-pause
+f_pause
 
 # ----------------------------------------------------
 echo "2) 경로 이동과 상대경로, 절대경로 비교"
@@ -53,17 +51,17 @@ echo "현재 경로: $(pwd)"
 echo "cd project/alpha"
 cd project/alpha
 echo "pwd 결과(상대경로 이동): $(pwd)"
-pause
+f_pause
 
 echo "cd ../../project/gamma (상대경로로 이동)"
 cd ../../project/gamma
 echo "pwd 결과: $(pwd)"
-pause
+f_pause
 
 echo "절대경로 이동 예시:"
 cd "$WORK_DIR/project/beta"
 echo "pwd 결과(절대경로): $(pwd)"
-pause
+f_pause
 
 # ----------------------------------------------------
 echo "3) 글로빙(와일드카드) 연습"
@@ -72,13 +70,13 @@ echo "   *.txt 파일:"
 ls project/*/*.txt
 echo "   file?.* (file + 한 글자 + 확장자):"
 ls project/*/file?.*
-pause
+f_pause
 
 # ----------------------------------------------------
 echo "4) grep으로 확장자별 검색"
 echo "모든 .log 파일 중 'error' 단어가 포함된 파일만 찾기:"
 grep -ril 'error' project || echo "(결과 없음)"
-pause
+f_pause
 
 # ----------------------------------------------------
 echo "5) sed로 파일명 보기 좋게 변환"
@@ -101,18 +99,18 @@ find project -type f | sed -E 's#.*/#→ #'
 # | `s#.*/#→ #`  | 깔끔하게 표현 (추천 ✅)      |
 
 
-pause
+f_pause
 
 # ----------------------------------------------------
 echo "6) awk로 디렉터리별 파일 개수 세기"
 echo "(find 결과를 awk로 그룹 카운트)"
 find project -type f | awk -F/ '{count[$2]++} END {for (dir in count) printf "폴더 %s: %d개 파일\n", dir, count[dir]}' | sort
-pause
+f_pause
 
 # ----------------------------------------------------
 echo "7) 정규표현식으로 .log 파일명 중 '숫자' 포함만 찾기"
 find project -type f | grep -E '[0-9]+\.log$' || echo "(결과 없음)"
-pause
+f_pause
 
 # ----------------------------------------------------
 echo "8) 실습 정리"

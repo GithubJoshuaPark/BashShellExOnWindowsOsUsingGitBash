@@ -12,11 +12,11 @@ echo
 # VS Code에서 바로 생성 파일을 확인할 수 있게 설계
 
 # ▣ [1] 공통 설정
-pause() { read -rp "계속하려면 [Enter] 키를 누르세요..." _; }
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 mkdir -p "$TMP_DIR"
+
+source "$SCRIPT_DIR/utils.sh"
 
 # ▣ [2] 헤더
 cat <<'B'
@@ -48,43 +48,43 @@ DATA
 echo "생성된 파일: $CFG_FILE"
 echo "--------------------------------"
 nl -ba "$CFG_FILE"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "2️⃣  특정 행(범위)만 출력하기"
 echo "2~4행만 출력:"
 sed -n '2,4p' "$CFG_FILE"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "3️⃣  특정 패턴으로 시작하는 라인만 보기"
 echo "host= 으로 시작하는 행:"
 sed -n '/^host=/p' "$CFG_FILE"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "4️⃣  주석 라인(#) 삭제"
 echo "(패턴 매칭 후 /PATTERN/d)"
 sed -E '/^\s*#/d' "$CFG_FILE"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "5️⃣  문자열 치환 s///"
 echo "mode=dev → mode=prod 으로 변경:"
 sed -E 's/^mode=dev$/mode=prod/' "$CFG_FILE"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "6️⃣  s@...@...@ 구분자 변경 예시"
 echo "URL 경로처럼 / 가 많은 경우:"
 sed -E 's@^host=.*$@host=api.example.com@' "$CFG_FILE"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "7️⃣  여러 명령 결합 (-e 옵션)"
 echo "주석 제거 후, mode 변경 후, host 변경:"
 sed -E -e '/^#/d' -e 's/mode=dev/mode=prod/' -e 's/host=.*/host=local.test/' "$CFG_FILE"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "8️⃣  백업 + 인플레이스 수정 예제 (-i.bak)"
@@ -93,11 +93,11 @@ cp "$CFG_FILE" "$CFG_FILE.bak"
 echo "mode=dev → mode=release 로 변경 후 저장:"
 sed -i.bak -E 's/^mode=dev$/mode=release/' "$CFG_FILE"
 cat "$CFG_FILE"
-pause
+f_pause
 
 echo "백업파일(.bak):"
 cat "$CFG_FILE.bak"
-pause
+f_pause
 
 # 복원
 mv "$CFG_FILE.bak" "$CFG_FILE"
@@ -106,7 +106,7 @@ mv "$CFG_FILE.bak" "$CFG_FILE"
 echo "9️⃣  정규표현식으로 숫자 값 증가 (timeout 값 +10)"
 echo "(캡처 그룹 사용: \\1)"
 sed -E 's/^(timeout=)([0-9]+)/echo "\1"$((\2+10))/e' "$CFG_FILE"
-pause
+f_pause
 
 # ------------------------------------------------------------
 echo "✅  레슨 12 완료!"

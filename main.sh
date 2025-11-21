@@ -32,7 +32,7 @@ titles=(
     "($(get_random_emoji)) sed 입문: 치환 & 필터"
     "($(get_random_emoji)) sed 고급: 인플레이스, 캡처/백레퍼런스"
     "($(get_random_emoji)) awk 입문: 필드 처리"
-    "($(get_random_emoji)) awk 고급: 조건/형식화/딕셔너리"
+    "($(get_random_emoji)) awk 고급: 조건/형식화/딕셔너리/함수, .awk 스크립트 파일"
     "($(get_random_emoji)) 실전 파이프라인: grep | awk | sed"
     "($(get_random_emoji)) 정규표현식 집중 연습(1): 이메일/URL 패턴"
     "($(get_random_emoji)) 정규표현식 집중 연습(2): 한국 주민/전화/날짜 패턴"

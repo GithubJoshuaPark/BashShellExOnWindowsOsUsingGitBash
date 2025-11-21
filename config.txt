@@ -1,0 +1,4 @@
+# Sample Config
+USER_NAME=Joshua
+HOST=localhost
+PORT=8080

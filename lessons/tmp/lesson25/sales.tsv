@@ -1,0 +1,5 @@
+OrderID	CustomerID	Product	Quantity	Total
+1001	C001	Laptop	1	1200.00
+1002	C002	Mouse	2	51.00
+1003	C001	Keyboard	1	75.00
+1004	C003	Monitor	1	300.00

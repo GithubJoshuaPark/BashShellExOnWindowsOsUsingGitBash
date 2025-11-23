@@ -3,7 +3,7 @@ set -euo pipefail
 
 # ▣ [1] 공통 설정
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0")"
+TMP_DIR="$SCRIPT_DIR/tmp/$(basename "$0" .sh)"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
 

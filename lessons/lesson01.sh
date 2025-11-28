@@ -41,7 +41,7 @@ echo "3) 도움말/매뉴얼 확인:"
 # OS 종류에 따라 다른 명령 실행
 if [[ "$(uname)" == "Darwin" ]]; then # Darwin은 macOS의 커널 이름입니다.
   echo "macOS detected: $(uname)"
-  man grep | head -5
+  man grep | head -5 || true
 else
   echo "Linux detected: $(uname)"
   grep --help | head -n 5

@@ -73,20 +73,21 @@ read -p "위와 같이 변경을 진행할까요? (yes/no): " answer
 # 사용자의 답변이 'yes'가 아니면 스크립트를 종료합니다.
 if [[ "$answer" != "yes" ]]; then
   echo "작업을 취소했습니다."
-  exit 1
+  echo
+else
+  echo
+  echo "파일 이름 변경을 시작합니다..."
+  find "$TARGET_DIR" -type f -name "*.txt" | while read -r file; do
+    basename="${file%.txt}"
+    new_name="${basename}_final.txt"
+
+    # mv 명령어 실행
+    # 변수를 큰따옴표로 감싸 공백이 포함된 파일 이름도 안전하게 처리
+    mv "$file" "$new_name"
+    echo "  - 완료: $(basename "$new_name")"
+  done
 fi
 
-echo
-echo "파일 이름 변경을 시작합니다..."
-find "$TARGET_DIR" -type f -name "*.txt" | while read -r file; do
-  basename="${file%.txt}"
-  new_name="${basename}_final.txt"
-
-  # mv 명령어 실행
-  # 변수를 큰따옴표로 감싸 공백이 포함된 파일 이름도 안전하게 처리
-  mv "$file" "$new_name"
-  echo "  - 완료: $(basename "$new_name")"
-done
 f_pause
 
 # ------------------------------------------------------------

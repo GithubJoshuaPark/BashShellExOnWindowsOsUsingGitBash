@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-# mytool - 간단한 CLI 미니툴 예제
-
-if [[ -z "$1" ]]; then
-    echo "사용법: mytool <메시지>"
-    exit 1
-fi
-
-echo "MyTool says: $1"

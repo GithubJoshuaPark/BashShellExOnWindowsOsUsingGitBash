@@ -1,20 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-###############################
-# 🎲 이모지 배열 정의
-###############################
-ME_EMOJI=(💡 ✅️ ⛔ 🚫 ⚙️ 🧩 ✨ ⚠️ 💻 🐶 🐱 🐹 🐰 🦊 🐻 🐼 🐯 🦁 🐮 🐸 😺 😸 😹 😻 😼 😽 🙀 🐣 🐳 🌏 🍎 🍳 ⚾️ 🏄 🚴 🎧 🎮 🏍 ✈️🏝️ 🕹️ ❤️💞 ⚽️ 🥊 🐘 🐒 🐨 🐺 🐷 🐧 🐥 🐔 🐦 🐍 🐄 🐟 🐉 🐋 🐌 🐙 🐝 🐞 🐛 🐳 🐐 🐃 🐡 🌸 🌹 🐆 🐫 🐈 🐊 🐩 🐾 🎃 🎅 💾 🎊 📷 🎁 🎇 🌆 ⛪ 🏬 🏤 😁 😝 🙈 🙉 💎 💗)
-
-# 함수: 무작위 이모지를 반환
-get_random_emoji() {
-    echo "${ME_EMOJI[$((RANDOM % ${#ME_EMOJI[@]}))]}"
-}
-
 # 실행 경로 고정
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "▶ 스크립트 디렉터리: $SCRIPT_DIR"
 LESSON_DIR="$SCRIPT_DIR/lessons"
+
+source "$SCRIPT_DIR/lessons/utils.sh"
 
 # 메뉴 목록
 titles=(

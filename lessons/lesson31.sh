@@ -55,7 +55,7 @@ list_todos() {
         echo "To-Do 리스트가 비어 있습니다."
         return 0
     fi
-    awk -F'|' '{ 
+    awk -F'|' '{
         status = ($1 == "DONE") ? "[완료]" : "[대기]";
         print NR ". " status " " $2;
     }' "$TODO_FILE"
@@ -70,19 +70,19 @@ complete_todo() {
         echo "오류: 완료할 To-Do 항목의 번호를 숫자로 입력해주세요."
         return 1
     fi
-    
+
     local line_content=$(sed -n "${item_num}p" "$TODO_FILE")
     if [[ -z "$line_content" ]]; then
         echo "오류: ${item_num}번 항목이 존재하지 않습니다."
         return 1
     fi
-    
+
     if echo "$line_content" | grep -q "^DONE|"; then
         echo "${item_num}번 항목은 이미 완료되었습니다."
         return 0
     fi
 
-    sed -i "${item_num}s/^PENDING/DONE/" "$TODO_FILE"
+    sed_i "${item_num}s/^PENDING/DONE/" "$TODO_FILE"
     echo "${item_num}번 To-Do 항목이 완료되었습니다."
     return 0
 }
@@ -101,7 +101,7 @@ delete_todo() {
         return 1
     fi
 
-    sed -i "${item_num}d" "$TODO_FILE"
+    sed_i "${item_num}d" "$TODO_FILE"
     echo "${item_num}번 To-Do 항목이 삭제되었습니다."
     return 0
 }
@@ -129,27 +129,27 @@ while true; do
     case "$choice" in
         1) # List Todos
             f_pause
-            ;; 
+            ;;
         2) # Add a Todo
             read -rp "추가할 To-Do 내용을 입력하세요: " desc
             add_todo "$desc" || f_pause # 오류 시에만 일시 정지
-            ;; 
+            ;;
         3) # Complete a Todo
             read -rp "완료할 To-Do 항목의 번호를 입력하세요: " id
             complete_todo "$id" || f_pause # 오류 시에만 일시 정지
-            ;; 
+            ;;
         4) # Delete a Todo
             read -rp "삭제할 To-Do 항목의 번호를 입력하세요: " id
             delete_todo "$id" || f_pause # 오류 시에만 일시 정지
-            ;; 
+            ;;
         5) # Exit
             echo "메인 메뉴로 돌아갑니다."
             break
-            ;; 
-        *) 
+            ;;
+        *)
             echo "잘못된 선택입니다. 1-5 사이의 숫자를 입력해주세요."
             f_pause
-            ;; 
+            ;;
     esac
 done
 

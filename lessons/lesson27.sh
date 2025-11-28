@@ -70,14 +70,14 @@ f_pause
 echo "3️⃣  기존 키의 값 변경하기"
 echo "--- 'server_port'를 '8080'에서 '9000'으로 변경 ---"
 echo "실행: sed -i.bak 's/^server_port=8080/server_port=9000/' \"$CONFIG_FILE\""
-sed -i.bak 's/^server_port=8080/server_port=9000/' "$CONFIG_FILE"
+sed_i_bak 's/^server_port=8080/server_port=9000/' "$CONFIG_FILE"
 echo "변경 후 파일 내용:"
 cat "$CONFIG_FILE"
 f_pause
 
 echo "--- 'debug_mode'를 'false'에서 'true'로 변경 ---"
 echo "실행: sed -i 's/^debug_mode=false/debug_mode=true/' \"$CONFIG_FILE\""
-sed -i 's/^debug_mode=false/debug_mode=true/' "$CONFIG_FILE"
+sed_i 's/^debug_mode=false/debug_mode=true/' "$CONFIG_FILE"
 echo "변경 후 파일 내용:"
 cat "$CONFIG_FILE"
 f_pause
@@ -102,7 +102,7 @@ f_pause
 echo "5️⃣  키-값 쌍 삭제하기"
 echo "--- 'log_file' 설정 삭제 ---"
 echo "실행: sed -i '/^log_file=/d' \"$CONFIG_FILE\""
-sed -i '/^log_file=/d' "$CONFIG_FILE"
+sed_i '/^log_file=/d' "$CONFIG_FILE"
 echo "변경 후 파일 내용:"
 cat "$CONFIG_FILE"
 f_pause
@@ -111,7 +111,7 @@ f_pause
 echo "6️⃣  주석 처리된 설정 변경 및 활성화"
 echo "--- '# max_connections=100'을 'max_connections=200'으로 변경 및 활성화 ---"
 echo "실행: sed -i 's/^# *max_connections=.*/max_connections=200/' \"$CONFIG_FILE\""
-sed -i 's/^# *max_connections=.*/max_connections=200/' "$CONFIG_FILE"
+sed_i 's/^# *max_connections=.*/max_connections=200/' "$CONFIG_FILE"
 echo "변경 후 파일 내용:"
 cat "$CONFIG_FILE"
 f_pause

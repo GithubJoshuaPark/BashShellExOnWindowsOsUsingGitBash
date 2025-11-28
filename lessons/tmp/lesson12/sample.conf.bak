@@ -1,0 +1,6 @@
+# Sample configuration file
+host=example.com
+port=8080
+mode=dev
+timeout=30
+# end of file

@@ -51,7 +51,7 @@ echo "'-i' 옵션은 결과를 화면에 출력하는 대신 파일을 직접 �
 echo "실수로 인한 데이터 유실을 막기 위해 백업 파일을 만드는 '-i.bak' 사용을 권장합니다."
 echo
 echo "실행: sed -i.bak 's/doe/davis/' \"$CSV_FILE\""
-sed -i.bak 's/doe/davis/' "$CSV_FILE"
+sed_i_bak 's/doe/davis/' "$CSV_FILE"
 
 echo
 echo "파일이 직접 수정되었고, 원본은 'users.csv.bak'으로 백업되었습니다."

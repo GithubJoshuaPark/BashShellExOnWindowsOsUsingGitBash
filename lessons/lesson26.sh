@@ -75,8 +75,8 @@ f_pause
 echo "4️⃣  오래된 로그 보관 및 삭제 (Retention)"
 echo "--- 3일보다 오래된 압축 로그 파일 삭제 ---"
 # 테스트를 위해 가상의 오래된 파일 생성
-touch -d "4 days ago" "$TMP_DIR/app.log.$(date -d '4 days ago' +%Y%m%d).gz"
-touch -d "5 days ago" "$TMP_DIR/app.log.$(date -d '5 days ago' +%Y%m%d).gz"
+touch_d "4 days ago" "$TMP_DIR/app.log.$(date_offset '4 days ago' +%Y%m%d).gz"
+touch_d "5 days ago" "$TMP_DIR/app.log.$(date_offset '5 days ago' +%Y%m%d).gz"
 echo "가상의 오래된 로그 파일 생성 완료."
 ls -l "$TMP_DIR"
 f_pause

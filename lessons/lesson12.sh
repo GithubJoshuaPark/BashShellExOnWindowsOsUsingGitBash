@@ -91,7 +91,7 @@ echo "8️⃣  백업 + 인플레이스 수정 예제 (-i.bak)"
 echo "(주의: 실제 파일을 수정하므로 마지막에 복원)"
 cp "$CFG_FILE" "$CFG_FILE.bak"
 echo "mode=dev → mode=release 로 변경 후 저장:"
-sed -i.bak -E 's/^mode=dev$/mode=release/' "$CFG_FILE"
+sed_i_bak -E 's/^mode=dev$/mode=release/' "$CFG_FILE"
 cat "$CFG_FILE"
 f_pause
 
@@ -105,7 +105,15 @@ mv "$CFG_FILE.bak" "$CFG_FILE"
 # ------------------------------------------------------------
 echo "9️⃣  정규표현식으로 숫자 값 증가 (timeout 값 +10)"
 echo "(캡처 그룹 사용: \\1)"
-sed -E 's/^(timeout=)([0-9]+)/echo "\1"$((\2+10))/e' "$CFG_FILE"
+# sed /e 플래그는 GNU sed 전용이므로, 셸 루프로 대체하여 호환성 확보
+while IFS= read -r line; do
+    if [[ "$line" =~ ^timeout=([0-9]+) ]]; then
+        val="${BASH_REMATCH[1]}"
+        echo "timeout=$((val + 10))"
+    else
+        echo "$line"
+    fi
+done < "$CFG_FILE"
 f_pause
 
 # ------------------------------------------------------------

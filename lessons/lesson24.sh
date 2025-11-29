@@ -122,6 +122,9 @@ echo "실행: (echo \"서브셸 안의 EXPORTED_VAR: \$EXPORTED_VAR\")"
 (echo "서브셸 안의 EXPORTED_VAR: $EXPORTED_VAR")
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 # ------------------------------------------------------------
 echo "✅  레슨 24 완료!"
 echo "서브셸과 현재 셸의 차이를 이해하는 것은 복잡한 Bash 스크립트를 작성하고 디버깅하는 데 필수적입니다."

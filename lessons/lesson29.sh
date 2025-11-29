@@ -146,6 +146,9 @@ echo "제거 후 '$TOOL_NAME' 존재 여부:"
 ls "$TMP_DIR/installed_mytool" 2>/dev/null || echo "파일 없음."
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 # ------------------------------------------------------------
 echo "✅  레슨 29 완료!"
 echo "간단한 CLI 미니툴을 만들고 배포하는 과정을 이해했습니다."

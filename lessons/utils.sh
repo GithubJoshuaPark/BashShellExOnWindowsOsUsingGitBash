@@ -18,6 +18,15 @@ f_pause() {
     echo;
 }
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp() {
+    echo "테스트용 데이터 폴더: ${TMP_DIR}"
+    read -p "$(get_random_emoji) 테스트용 데이터 삭제(Y|y/N|n): " sel
+    if [[ "$sel" =~ ^[Yy]$ ]]; then
+        rm -rf "$TMP_DIR"
+    fi
+}
+
 # OS 감지
 OS_TYPE="$(uname)"
 

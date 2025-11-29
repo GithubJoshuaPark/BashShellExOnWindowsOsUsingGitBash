@@ -119,6 +119,9 @@ echo "--- 실패하는 명령 실행 ---"
 execute_command "cp non_existent_file.txt /dev/null" # 실패 예상 (non_existent_file.txt 없음), error_handler 호출
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 # ------------------------------------------------------------
 echo "✅  레슨 22 완료!"
 echo "견고한 스크립트 작성을 위한 에러 처리 및 안전장치 사용법을 익혔습니다."

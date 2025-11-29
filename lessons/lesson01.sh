@@ -79,6 +79,9 @@ awk '
 ' "$TMP_FILE"
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 echo "레슨 01 완료 🎉"
 
 

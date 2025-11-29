@@ -117,6 +117,10 @@ echo "8) 실습 정리"
 echo "작업 폴더 내용 확인:"
 tree project 2>/dev/null || find project
 echo
+
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 echo "레슨 02 완료 🎉"
 
 echo "========================"

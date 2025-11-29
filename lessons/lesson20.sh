@@ -83,6 +83,9 @@ echo "7️⃣  grep 정규표현식으로 주석 제외 출력"
 grep -vE '^\s*#' config_new.txt
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 echo "레슨 20 완료 🎉"
 
 echo "========================"

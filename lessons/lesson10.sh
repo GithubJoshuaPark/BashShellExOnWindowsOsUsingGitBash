@@ -109,6 +109,9 @@ echo "실행: grep -E \"^ERROR\" \"$LOG_FILE\" | grep -E \"404\""
 grep -E "^ERROR" "$LOG_FILE" | grep -E "404" --color=always
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 # ------------------------------------------------------------
 echo "✅  레슨 10 완료!"
 echo "생성된 임시 파일들은 $TMP_DIR 에서 확인할 수 있습니다."

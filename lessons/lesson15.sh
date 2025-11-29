@@ -185,6 +185,9 @@ echo "실행: awk -f \"$AWK_SCRIPT_2\" \"$SALES_LOG\""
 awk -f "$AWK_SCRIPT_2" "$SALES_LOG"
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 # ------------------------------------------------------------
 echo "✅  레슨 15 완료!"
 echo "생성된 임시 파일들은 $TMP_DIR 에서 확인할 수 있습니다."

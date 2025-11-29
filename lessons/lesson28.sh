@@ -81,6 +81,9 @@ echo "실행: find \"$TMP_DIR\" -name \"file_*.txt\" -print0 | xargs -0 -P 4 -I 
 find "$TMP_DIR" -name "file_*.txt" -print0 | xargs -0 -P 4 -I {} bash -c 'echo "$(basename {}) 처리 시작"; sleep 0.1; echo "$(basename {}) 처리 완료"'
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 # ------------------------------------------------------------
 echo "✅  레슨 28 완료!"
 echo "xargs -P를 사용하여 Bash 스크립트에서 병렬 처리를 구현하는 방법을 익혔습니다."

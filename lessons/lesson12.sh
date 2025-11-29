@@ -116,6 +116,9 @@ while IFS= read -r line; do
 done < "$CFG_FILE"
 f_pause
 
+# 테스트용 데이터 삭제 여부 
+f_delete_tmp
+
 # ------------------------------------------------------------
 echo "✅  레슨 12 완료!"
 echo "결과 파일은 VS Code에서 바로 확인 가능합니다."

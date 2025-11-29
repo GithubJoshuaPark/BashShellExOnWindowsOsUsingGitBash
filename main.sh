@@ -52,7 +52,7 @@ print_menu() {
     printf " %2d) %s\n" "$i" "${titles[$((i-1))]}"
   done
   echo "------------------------------"
-  echo " q) 종료"
+  echo " q | Q to exit) 종료"
   echo "------------------------------"
 }
 

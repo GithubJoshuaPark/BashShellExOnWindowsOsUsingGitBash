@@ -119,7 +119,7 @@ echo "--- 실패하는 명령 실행 ---"
 execute_command "cp non_existent_file.txt /dev/null" # 실패 예상 (non_existent_file.txt 없음), error_handler 호출
 f_pause
 
-# 테스트용 데이터 삭제 여부 
+# 테스트용 데이터 삭제 여부
 f_delete_tmp
 
 # ------------------------------------------------------------

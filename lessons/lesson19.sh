@@ -35,7 +35,7 @@ mkdir -p "$TMP_DIR/docs" "$TMP_DIR/logs" "$TMP_DIR/scripts" "$TMP_DIR/data" "$TM
 
 touch "$TMP_DIR/docs/report.txt"
 touch "$TMP_DIR/docs/old_notes.txt"
-touch -d "2 weeks ago" "$TMP_DIR/docs/old_notes.txt" # 2주 전 파일로 설정
+touch_d "14 days ago" "$TMP_DIR/docs/old_notes.txt" # 2주 전 파일로 설정
 
 echo "This is an application log." > "$TMP_DIR/logs/app.log"
 echo "ERROR: Something went wrong." > "$TMP_DIR/logs/error.log"

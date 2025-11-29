@@ -24,9 +24,13 @@ OS_TYPE="$(uname)"
 # sed -i 호환성 함수
 # 사용법: sed_i 's/foo/bar/' filename
 sed_i() {
+    # $OS_TYPE 변수는 스크립트 상단에서 $(uname)으로 미리 설정해 두었습니다.
+    # sed -i는 파일을 직접 수정(in-place edit)하는 옵션인데, 운영체제마다 문법이 조금 다릅니다.
     if [[ "$OS_TYPE" == "Darwin" ]]; then
+        # macOS인 경우: -i 뒤에 빈 문자열('')을 명시적으로 추가합니다.
         sed -i '' "$@"
     else
+        # Linux(Git Bash 등)인 경우: -i만 사용해도 됩니다.
         sed -i "$@"
     fi
 }
@@ -35,8 +39,10 @@ sed_i() {
 # 사용법: sed_i_bak 's/foo/bar/' filename
 sed_i_bak() {
     if [[ "$OS_TYPE" == "Darwin" ]]; then
+        # macOS인 경우: -i .bak 옵션을 사용합니다.
         sed -i .bak "$@"
     else
+        # Linux(Git Bash 등)인 경우: -i.bak 옵션을 사용합니다.
         sed -i.bak "$@"
     fi
 }
@@ -80,76 +86,3 @@ touch_d() {
     fi
 }
 
-# ▣ [2] Cross-Platform Wrappers
-
-# OS Detection
-OS_NAME="$(uname)"
-
-# Wrapper for sed -i (in-place editing without backup)
-# Usage: sed_i [options] 'expression' file
-sed_i() {
-    if [[ "$OS_NAME" == "Darwin" ]]; then
-        sed -i '' "$@"
-    else
-        sed -i "$@"
-    fi
-}
-
-# Wrapper for sed -i.bak (in-place editing with backup)
-# Usage: sed_i_bak [options] 'expression' file
-sed_i_bak() {
-    if [[ "$OS_NAME" == "Darwin" ]]; then
-        sed -i .bak "$@"
-    else
-        sed -i.bak "$@"
-    fi
-}
-
-# Wrapper for date -d (relative date calculation)
-# Usage: date_d "relative_date_string" "format_string"
-# Example: date_d "4 days ago" "+%Y%m%d"
-date_d() {
-    local relative_date="$1"
-    local format="$2"
-
-    if [[ "$OS_NAME" == "Darwin" ]]; then
-        # macOS: date -v-4d +%Y%m%d (requires parsing "4 days ago")
-        # Simple parsing for "N days ago"
-        if [[ "$relative_date" =~ ([0-9]+)\ days\ ago ]]; then
-            local days="${BASH_REMATCH[1]}"
-            date -v-"${days}"d "$format"
-        else
-            # Fallback or more complex parsing if needed
-            echo "Error: Unsupported date format for macOS wrapper: $relative_date" >&2
-            return 1
-        fi
-    else
-        # Linux
-        date -d "$relative_date" "$format"
-    fi
-}
-
-# Wrapper for touch -d (set file modification time)
-# Usage: touch_d "relative_date_string" file
-# Example: touch_d "4 days ago" file
-touch_d() {
-    local relative_date="$1"
-    local file="$2"
-
-    if [[ "$OS_NAME" == "Darwin" ]]; then
-        # macOS: touch -t YYYYMMDDhhmm
-        # We need to convert relative date to this format
-        # Use date_d logic to get the format
-        if [[ "$relative_date" =~ ([0-9]+)\ days\ ago ]]; then
-            local days="${BASH_REMATCH[1]}"
-            local timestamp=$(date -v-"${days}"d +%Y%m%d%H%M)
-            touch -t "$timestamp" "$file"
-        else
-             echo "Error: Unsupported date format for macOS touch wrapper: $relative_date" >&2
-             return 1
-        fi
-    else
-        # Linux
-        touch -d "$relative_date" "$file"
-    fi
-}

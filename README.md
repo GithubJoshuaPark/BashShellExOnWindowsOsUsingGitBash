@@ -1,5 +1,7 @@
 # Bash Shell Exercising with some examples
 
+[![Bash](https://img.shields.io/badge/Bash-3.2-blue)](https://www.gnu.org/software/bash/)
+
 Bash 셸(Bourne Again SHell)은 리눅스 및 유닉스 계열 운영체제에서 널리 사용되는 명령어 해석기이자 스크립트 언어입니다.
 
 ```bash
